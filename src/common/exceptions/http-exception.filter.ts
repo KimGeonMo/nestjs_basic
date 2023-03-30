@@ -14,25 +14,16 @@ export class HttpExceptionFilter<T> implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const request = ctx.getRequest();
     const response = ctx.getResponse();
-    const message = exception.message as
-      | string
-      | { statusCode: number; message: string };
+    // console.log(exception);
+    const message = exception.getResponse();
     const status = exception.getStatus();
 
-    this.logger.debug(`tpyeof message : ${typeof message}`);
+    console.log('message:', message);
 
-    if (typeof message === 'string') {
-      response.status(status).json({
-        success: false,
-        date: new Date().toISOString(),
-        message,
-      });
-    } else {
-      response.status(status).json({
-        success: false,
-        date: new Date().toISOString(),
-        ...message,
-      });
-    }
+    response.status(status).json({
+      success: false,
+      date: new Date().toISOString(),
+      message,
+    });
   }
 }
