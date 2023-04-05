@@ -31,6 +31,7 @@ export class AuthService {
     }
 
     const payload = { email: email, sub: cat.id };
+    console.log('commit test');
 
     return {
       token: this.jwtService.sign(payload),
