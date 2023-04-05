@@ -9,10 +9,14 @@ export class CatsRepository {
   constructor(@InjectModel(Cat.name) private readonly catModel: Model<Cat>) {}
 
   async existsByEmail(email: string): Promise<object> {
-    return await this.catModel.exists({ email });
+    return this.catModel.exists({ email });
   }
 
   async create(cat: CatRequestDto): Promise<Cat> {
-    return await this.catModel.create(cat);
+    return this.catModel.create(cat);
+  }
+
+  async findCatByEmail(email: string): Promise<Cat | null> {
+    return this.catModel.findOne({ email });
   }
 }

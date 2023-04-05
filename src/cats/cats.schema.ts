@@ -24,7 +24,6 @@ export class Cat extends Document {
 
   @Prop({ required: true })
   @IsString()
-  @IsNotEmpty()
   @ApiProperty({
     example: 'name',
     description: 'name',
